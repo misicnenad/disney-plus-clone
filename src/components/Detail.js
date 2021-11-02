@@ -1,37 +1,63 @@
-import React from 'react'
+import { doc, getDoc } from 'firebase/firestore'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router'
+import { Redirect } from 'react-router-dom'
 import styled from 'styled-components'
+import db from '../firebase'
 
 function Detail() {
+    const { id } = useParams()
+    const [movie, setMovie] = useState()
+    const [shouldRedirect, setShouldRedirect] = useState()
+
+    useEffect(() => {
+        // Grab the movie info from db
+        const dbRef = doc(db, 'movies', id)
+        getDoc(dbRef).then((doc) => {
+            if (doc.exists()) {
+                // save the movie data
+                setMovie(doc.data())
+            } else {
+                // redirect to home page
+                setShouldRedirect(true)
+            }
+        })
+    })
+
+    if (shouldRedirect) {
+        return <Redirect to='/' />
+    }
+
     return (
         <Container>
-            <Background>
-                <img src="/images/bao.jpg" alt="bao" />
-            </Background>
-            <ImageTitle>
-                <img src="/images/title-bao.png" alt="bao title" />
-            </ImageTitle>
-            <Controls>
-                <PlayButton>
-                    <img src="/images/play-icon-black.png" alt="play button" />
-                    <span>PLAY</span>
-                </PlayButton>
-                <TrailerButton>
-                <img src="/images/play-icon-white.png" alt="trailer button" />
-                    <span>Trailer</span>
-                </TrailerButton>
-                <AddButton>
-                    <span>+</span>
-                </AddButton>
-                <GroupWatchButton>
-                    <img src="/images/group-icon.png" alt="group watch icon" />
-                </GroupWatchButton>
-            </Controls>
-            <SubTitle>
-                2018 • 7m • Family, Fantasy, Kids, Animation
-            </SubTitle>
-            <Description>
-                A Chinese mom who's sad asdfasdkjfhlaskdfjhlaskdjfh asjdfkhas dfkjahsd flkjadshf lksajfh askdjfh alksjdfh askdjh aslkdfjhas dlkf
-            </Description>
+            {movie && (
+                <>
+                    <Background>
+                        <img src={movie.backgroundImg} alt='' />
+                    </Background>
+                    <ImageTitle>
+                        <img src={movie.titleImg} alt='' />
+                    </ImageTitle>
+                    <Controls>
+                        <PlayButton>
+                            <img src='/images/play-icon-black.png' alt='play button' />
+                            <span>PLAY</span>
+                        </PlayButton>
+                        <TrailerButton>
+                            <img src='/images/play-icon-white.png' alt='trailer button' />
+                            <span>Trailer</span>
+                        </TrailerButton>
+                        <AddButton>
+                            <span>+</span>
+                        </AddButton>
+                        <GroupWatchButton>
+                            <img src='/images/group-icon.png' alt='group watch icon' />
+                        </GroupWatchButton>
+                    </Controls>
+                    <SubTitle>{movie.subtitle}</SubTitle>
+                    <Description>{movie.description}</Description>
+                </>
+            )}
         </Container>
     )
 }
