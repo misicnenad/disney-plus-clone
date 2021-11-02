@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
-import styled from 'styled-components'
-import ImgSlider from './ImgSlider'
-import Viewers from './Viewers'
-import Movies from './Movies'
-import db from '../firebase'
 import { collection, onSnapshot } from 'firebase/firestore'
+import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
+import styled from 'styled-components'
 import { setMovies } from '../features/movie/movieSlice'
+import db from '../firebase'
+import ImgSlider from './ImgSlider'
+import Movies from './Movies'
+import Viewers from './Viewers'
 
 function Home() {
     const dispatch = useDispatch()
@@ -19,7 +19,7 @@ function Home() {
 
             dispatch(setMovies(tempMovies))
         })
-    }, [])
+    })
 
     return (
         <Container>

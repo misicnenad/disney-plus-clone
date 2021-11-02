@@ -1,42 +1,55 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import { useSelector } from 'react-redux'
+import styled from 'styled-components'
+import { selectUserName, selectUserPhoto } from '../features/user/userSlice'
 
 function Header() {
+    const userName = useSelector(selectUserName)
+    const userPhoto = useSelector(selectUserPhoto)
+
     return (
         <Nav>
             <Logo src='/images/logo.svg' />
-            <NavMenu>
-                <a>
-                    <img src="/images/home-icon.svg" alt="home"/>
-                    <span>HOME</span>
-                </a>
-                <a>
-                    <img src="/images/search-icon.svg" alt="search"/>
-                    <span>SEARCH</span>
-                </a>
-                <a>
-                    <img src="/images/watchlist-icon.svg" alt="watchlist"/>
-                    <span>WATCHLIST</span>
-                </a>
-                <a>
-                    <img src="/images/original-icon.svg" alt="original"/>
-                    <span>ORIGINALS</span>
-                </a>
-                <a>
-                    <img src="/images/movie-icon.svg" alt="movie"/>
-                    <span>MOVIES</span>
-                </a>
-                <a>
-                    <img src="/images/series-icon.svg" alt=""/>
-                    <span>SERIES</span>
-                </a>
-            </NavMenu>
-            <UserImg src="/images/mgs.png" alt="profile image" />
+            {!userName ? (
+                <LoginContainer>
+                    <Login>Login</Login>
+                </LoginContainer>
+            ) : (
+                <>
+                    <NavMenu>
+                        <a>
+                            <img src='/images/home-icon.svg' alt='home' />
+                            <span>HOME</span>
+                        </a>
+                        <a>
+                            <img src='/images/search-icon.svg' alt='search' />
+                            <span>SEARCH</span>
+                        </a>
+                        <a>
+                            <img src='/images/watchlist-icon.svg' alt='watchlist' />
+                            <span>WATCHLIST</span>
+                        </a>
+                        <a>
+                            <img src='/images/original-icon.svg' alt='original' />
+                            <span>ORIGINALS</span>
+                        </a>
+                        <a>
+                            <img src='/images/movie-icon.svg' alt='movie' />
+                            <span>MOVIES</span>
+                        </a>
+                        <a>
+                            <img src='/images/series-icon.svg' alt='' />
+                            <span>SERIES</span>
+                        </a>
+                    </NavMenu>
+                    <UserImg src='/images/mgs.png' alt='profile image' />
+                </>
+            )}
         </Nav>
-    );
+    )
 }
 
-export default Header;
+export default Header
 
 const Nav = styled.nav`
     height: 70px;
@@ -45,11 +58,11 @@ const Nav = styled.nav`
     align-items: center;
     padding: 0 36px;
     overflow-x: hidden;
-`;
+`
 
 const Logo = styled.img`
     width: 80px;
-`;
+`
 
 const NavMenu = styled.div`
     display: flex;
@@ -73,7 +86,7 @@ const NavMenu = styled.div`
             position: relative;
 
             &:after {
-                content: "";
+                content: '';
                 height: 2px;
                 background: white;
                 position: absolute;
@@ -100,4 +113,27 @@ const UserImg = styled.img`
     height: 48px;
     border-radius: 50%;
     cursor: pointer;
+`
+const Login = styled.button`
+    border: 1px solid #f9f9f9;
+    padding: 8px 16px;
+    border-radius: 4px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #f9f9f9;
+    transition: all 0.2s ease 0s;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #f9f9f9;
+        color: #000;
+        border-color: transparent;
+    }
+`
+
+const LoginContainer = styled.div`
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
 `
