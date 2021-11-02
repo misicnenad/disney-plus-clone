@@ -22,7 +22,7 @@ function Detail() {
                 setShouldRedirect(true)
             }
         })
-    })
+    }, [id])
 
     if (shouldRedirect) {
         return <Redirect to='/' />
