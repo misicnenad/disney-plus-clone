@@ -46,14 +46,14 @@ function Header() {
     }
 
     return (
-        <Nav>
-            <Logo src='/images/logo.svg' />
-            {!userName ? (
-                <LoginContainer>
-                    <Login onClick={signIn}>Login</Login>
-                </LoginContainer>
-            ) : (
-                <>
+        <>
+            <Nav>
+                <Logo src='/images/logo.svg' />
+                {!userName ? (
+                    <LoginContainer>
+                        <Login onClick={signIn}>Login</Login>
+                    </LoginContainer>
+                ) : (
                     <NavMenu>
                         <StyledLink to={`/`}>
                             <img src='/images/home-icon.svg' alt='home' />
@@ -80,26 +80,28 @@ function Header() {
                             <span>SERIES</span>
                         </StyledLink>
                     </NavMenu>
-                    <ProfileMenuSection>
-                        <ProfileInfo>
-                            <span>{userName}</span>
-                            <UserImg src={userPhoto} alt='profile image' />
-                        </ProfileInfo>
-                        <Dropdown id='dropdown'>
-                            <Separator />
-                            <AddProfileItem>
-                                <AddIcon>+</AddIcon>
-                                <span>Add Profile</span>
-                            </AddProfileItem>
-                            <DropdownItem>Edit Profiles</DropdownItem>
-                            <DropdownItem>Account</DropdownItem>
-                            <DropdownItem>Help</DropdownItem>
-                            <DropdownItem onClick={signUserOut}>Log Out</DropdownItem>
-                        </Dropdown>
-                    </ProfileMenuSection>
-                </>
+                )}
+            </Nav>
+            {userName && (
+                <ProfileMenuSection>
+                    <ProfileInfo>
+                        <span>{userName}</span>
+                        <UserImg src={userPhoto} alt='profile image' />
+                    </ProfileInfo>
+                    <Dropdown id='dropdown'>
+                        <Separator />
+                        <AddProfileItem>
+                            <AddIcon>+</AddIcon>
+                            <span>Add Profile</span>
+                        </AddProfileItem>
+                        <DropdownItem>Edit Profiles</DropdownItem>
+                        <DropdownItem>Account</DropdownItem>
+                        <DropdownItem>Help</DropdownItem>
+                        <DropdownItem onClick={signUserOut}>Log Out</DropdownItem>
+                    </Dropdown>
+                </ProfileMenuSection>
             )}
-        </Nav>
+        </>
     )
 }
 
@@ -107,11 +109,18 @@ export default Header
 
 const Nav = styled.nav`
     height: 70px;
+    max-height: 70px;
     background: #090b13;
     display: flex;
     align-items: center;
     padding: 0 36px;
     overflow-x: hidden;
+    overflow-y: hidden;
+
+    position: sticky;
+    top: 0;
+    width: 100vw;
+    z-index: 1;
 `
 
 const Logo = styled.img`
@@ -194,7 +203,7 @@ const LoginContainer = styled.div`
 `
 
 const ProfileMenuSection = styled.div`
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     padding: 10px 24px;
