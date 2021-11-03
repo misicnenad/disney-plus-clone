@@ -80,7 +80,23 @@ function Header() {
                             <span>SERIES</span>
                         </StyledLink>
                     </NavMenu>
-                    <UserImg src={userPhoto} alt='profile image' onClick={signUserOut} />
+                    <ProfileMenuSection>
+                        <ProfileInfo>
+                            <span>{userName}</span>
+                            <UserImg src={userPhoto} alt='profile image' />
+                        </ProfileInfo>
+                        <Dropdown id='dropdown'>
+                            <Separator />
+                            <AddProfileItem>
+                                <AddIcon>+</AddIcon>
+                                <span>Add Profile</span>
+                            </AddProfileItem>
+                            <DropdownItem>Edit Profiles</DropdownItem>
+                            <DropdownItem>Account</DropdownItem>
+                            <DropdownItem>Help</DropdownItem>
+                            <DropdownItem onClick={signUserOut}>Log Out</DropdownItem>
+                        </Dropdown>
+                    </ProfileMenuSection>
                 </>
             )}
         </Nav>
@@ -175,4 +191,105 @@ const LoginContainer = styled.div`
     display: flex;
     flex: 1;
     justify-content: flex-end;
+`
+
+const ProfileMenuSection = styled.div`
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px 24px;
+
+    background-color: #090b13;
+    width: 300px;
+    cursor: pointer;
+    transition: background-color 250ms;
+    z-index: 2;
+
+    &:hover {
+        border: 1px solid rgba(249, 249, 249, 0.2);
+        border-radius: 2px;
+        background-color: #222;
+        z-index: 2;
+        flex-direction: column;
+        justify-content: start;
+
+        #dropdown {
+            max-height: 500px;
+        }
+    }
+`
+
+const ProfileInfo = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.8rem;
+    justify-content: end;
+    color: rgb(249, 249, 249);
+`
+
+const Dropdown = styled.div`
+    display: flex;
+    flex-direction: column;
+    max-height: 0;
+    transition: all 250ms;
+    overflow: hidden;
+`
+
+const Separator = styled.hr`
+    border-color: rgba(249, 249, 249, 0.1);
+    width: 90%;
+`
+
+const DropdownItem = styled.a`
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+        opacity: 1;
+
+        button {
+            background-color: #444;
+        }
+    }
+`
+
+const AddProfileItem = styled.a`
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+        opacity: 1;
+
+        button {
+            background-color: #444;
+        }
+
+        span {
+            opacity: 0.8;
+        }
+    }
+`
+
+const AddIcon = styled.button`
+    margin-right: 16px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: none;
+    background-color: #333;
+    cursor: pointer;
+    font-size: 30px;
+    color: white;
 `
