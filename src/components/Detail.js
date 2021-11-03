@@ -11,14 +11,11 @@ function Detail() {
     const [shouldRedirect, setShouldRedirect] = useState()
 
     useEffect(() => {
-        // Grab the movie info from db
         const dbRef = doc(db, 'movies', id)
         getDoc(dbRef).then((doc) => {
             if (doc.exists()) {
-                // save the movie data
                 setMovie(doc.data())
             } else {
-                // redirect to home page
                 setShouldRedirect(true)
             }
         })
