@@ -257,6 +257,7 @@ const DropdownItem = styled.a`
     padding: 8px 12px;
     display: flex;
     align-items: center;
+    transition: all 250ms;
 
     &:hover {
         opacity: 1;
@@ -301,4 +302,5 @@ const AddIcon = styled.button`
     cursor: pointer;
     font-size: 30px;
     color: white;
+    transition: all 250ms;
 `
