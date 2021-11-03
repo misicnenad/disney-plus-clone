@@ -1,10 +1,15 @@
-import React, { useEffect } from 'react'
 import { onAuthStateChanged, signInWithPopup, signOut } from '@firebase/auth'
-import { auth, provider } from '../firebase'
-import { useSelector, useDispatch } from 'react-redux'
-import styled from 'styled-components'
-import { selectUserName, selectUserPhoto, setUserLogin, setSignOut } from '../features/user/userSlice'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
+import styled from 'styled-components'
+import {
+    selectUserName,
+    selectUserPhoto,
+    setSignOut,
+    setUserLogin,
+} from '../features/user/userSlice'
+import { auth, provider } from '../firebase'
 
 function Header() {
     const dispatch = useDispatch()
@@ -64,11 +69,17 @@ function Header() {
                             <span>SEARCH</span>
                         </StyledLink>
                         <StyledLink to={`/`}>
-                            <img src='/images/watchlist-icon.svg' alt='watchlist' />
+                            <img
+                                src='/images/watchlist-icon.svg'
+                                alt='watchlist'
+                            />
                             <span>WATCHLIST</span>
                         </StyledLink>
                         <StyledLink to={`/`}>
-                            <img src='/images/original-icon.svg' alt='original' />
+                            <img
+                                src='/images/original-icon.svg'
+                                alt='original'
+                            />
                             <span>ORIGINALS</span>
                         </StyledLink>
                         <StyledLink to={`/`}>
@@ -97,7 +108,9 @@ function Header() {
                         <DropdownItem>Edit Profiles</DropdownItem>
                         <DropdownItem>Account</DropdownItem>
                         <DropdownItem>Help</DropdownItem>
-                        <DropdownItem onClick={signUserOut}>Log Out</DropdownItem>
+                        <DropdownItem onClick={signUserOut}>
+                            Log Out
+                        </DropdownItem>
                     </Dropdown>
                 </ProfileMenuSection>
             )}

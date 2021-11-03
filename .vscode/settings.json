@@ -2,5 +2,6 @@
     "javascript.format.semicolons": "remove",
     "typescript.format.semicolons": "remove",
     "prettier.semi": false,
-    "typescriptHero.imports.insertSemicolons": false
+    "typescriptHero.imports.insertSemicolons": false,
+    "prettier.jsxSingleQuote": true
 }
