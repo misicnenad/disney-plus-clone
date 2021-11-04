@@ -127,13 +127,11 @@ const Nav = styled.nav`
     display: flex;
     align-items: center;
     padding: 0 36px;
-    overflow-x: hidden;
-    overflow-y: hidden;
 
-    position: sticky;
+    position: fixed;
     top: 0;
     width: 100vw;
-    z-index: 1;
+    z-index: 2;
 `
 
 const Logo = styled.img`

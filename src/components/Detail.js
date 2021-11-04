@@ -64,7 +64,9 @@ export default Detail
 const Container = styled.div`
     min-height: calc(100vh - 70px);
     padding: 0 calc(3.5vw + 5px);
+    margin-top: 70px;
     position: relative;
+    overflow-y: auto;
 `
 
 const Background = styled.div`
@@ -88,7 +90,7 @@ const ImageTitle = styled.div`
     min-height: 170px;
     width: 35vw;
     min-width: 200px;
-    margin-top: 60px;
+    margin-top: 12vh;
 
     img {
         width: 100%;
